@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Rotate",
+                    "type": "Value",
+                    "id": "0ce7504d-f162-411f-a550-bf0198eac341",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -81,17 +90,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "a114165d-0193-402f-aaca-9cfed51d605b",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Climb",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "Shift/Ctrl",
                     "id": "d50bac0f-a28a-47ff-a3a1-03a607d4866e",
                     "path": "2DVector",
@@ -123,6 +121,67 @@
                     "action": "Climb",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "Q/E",
+                    "id": "daa41c4f-fd38-4b54-84ac-1f960a698d41",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "53d84043-2674-4d2a-b45f-ac821bf24d1c",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "67cb427c-6384-44fd-b848-7b007d5be1f6",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Mouse",
+            "id": "ee544f90-7ab6-4cfa-9cc7-8a9b83a39ac1",
+            "actions": [
+                {
+                    "name": "MouseLook",
+                    "type": "PassThrough",
+                    "id": "29b8cfcb-30e8-4b60-976f-a471e613a1a3",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c149982f-6443-4ea0-ad9d-a99d47b81dbc",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

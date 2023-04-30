@@ -44,6 +44,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""0ce7504d-f162-411f-a550-bf0198eac341"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -103,17 +112,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""a114165d-0193-402f-aaca-9cfed51d605b"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Climb"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""Shift/Ctrl"",
                     ""id"": ""d50bac0f-a28a-47ff-a3a1-03a607d4866e"",
                     ""path"": ""2DVector"",
@@ -145,6 +143,67 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Climb"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Q/E"",
+                    ""id"": ""daa41c4f-fd38-4b54-84ac-1f960a698d41"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""53d84043-2674-4d2a-b45f-ac821bf24d1c"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""67cb427c-6384-44fd-b848-7b007d5be1f6"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""Mouse"",
+            ""id"": ""ee544f90-7ab6-4cfa-9cc7-8a9b83a39ac1"",
+            ""actions"": [
+                {
+                    ""name"": ""MouseLook"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""29b8cfcb-30e8-4b60-976f-a471e613a1a3"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c149982f-6443-4ea0-ad9d-a99d47b81dbc"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -155,6 +214,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Climb = m_Player.FindAction("Climb", throwIfNotFound: true);
+        m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
+        // Mouse
+        m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
+        m_Mouse_MouseLook = m_Mouse.FindAction("MouseLook", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -216,12 +279,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Climb;
+    private readonly InputAction m_Player_Rotate;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Climb => m_Wrapper.m_Player_Climb;
+        public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -237,6 +302,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Climb.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClimb;
                 @Climb.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClimb;
                 @Climb.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClimb;
+                @Rotate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -247,13 +315,54 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Climb.started += instance.OnClimb;
                 @Climb.performed += instance.OnClimb;
                 @Climb.canceled += instance.OnClimb;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
             }
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Mouse
+    private readonly InputActionMap m_Mouse;
+    private IMouseActions m_MouseActionsCallbackInterface;
+    private readonly InputAction m_Mouse_MouseLook;
+    public struct MouseActions
+    {
+        private @PlayerControls m_Wrapper;
+        public MouseActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MouseLook => m_Wrapper.m_Mouse_MouseLook;
+        public InputActionMap Get() { return m_Wrapper.m_Mouse; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MouseActions set) { return set.Get(); }
+        public void SetCallbacks(IMouseActions instance)
+        {
+            if (m_Wrapper.m_MouseActionsCallbackInterface != null)
+            {
+                @MouseLook.started -= m_Wrapper.m_MouseActionsCallbackInterface.OnMouseLook;
+                @MouseLook.performed -= m_Wrapper.m_MouseActionsCallbackInterface.OnMouseLook;
+                @MouseLook.canceled -= m_Wrapper.m_MouseActionsCallbackInterface.OnMouseLook;
+            }
+            m_Wrapper.m_MouseActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MouseLook.started += instance.OnMouseLook;
+                @MouseLook.performed += instance.OnMouseLook;
+                @MouseLook.canceled += instance.OnMouseLook;
+            }
+        }
+    }
+    public MouseActions @Mouse => new MouseActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnClimb(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
+    }
+    public interface IMouseActions
+    {
+        void OnMouseLook(InputAction.CallbackContext context);
     }
 }
