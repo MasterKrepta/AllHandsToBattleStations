@@ -90,7 +90,7 @@ public class ShipHelm : MonoBehaviour, PlayerControls.IPlayerActions
     {
         ApplyRotation();
         ApplyThrust();
-        ApplyClimb();
+        //ApplyClimb();
         //ApplyLean();
     }
 

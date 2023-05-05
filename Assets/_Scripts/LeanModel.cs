@@ -6,8 +6,9 @@ using UnityEngine;
 public class LeanModel : MonoBehaviour
 {
     Rigidbody rb;
+    Quaternion initialRotation;
     [SerializeField] float leanAmount = 3f;
-    [SerializeField] float maxLeanAngle = 30f;
+    [SerializeField] float maxLeanAngle = 25f;
     [SerializeField] float leanTime = 2f;
     float rotY;
     float t;
@@ -25,57 +26,50 @@ public class LeanModel : MonoBehaviour
     void Start()
     {
         rb = GetComponentInParent<Rigidbody>();
+        initialRotation = transform.localRotation;
     }
-    void FixedUpdate()
-    {
 
-        if (rb.velocity.magnitude > 0.1f)
-        {
-            ResetLeanTime();
-        }
-        else
-        {
-            ResetLeanTime();
-        }
-
-        // TestLean();
-        // return;
-
-        //rotY = rb.rotation.eulerAngles.y;
-        rotY = rb.velocity.y;
-        //int dir = rotY > 180 ? -1 : 1;
-
-        //TODO verify if this is the correct way to do this, inverted when we are facing the other way
-        // Quaternion targetLean = Quaternion.Euler(rb.velocity.z * leanAmount, rotY, rb.velocity.x * leanAmount);
-        // transform.rotation = Quaternion.Lerp(transform.rotation, targetLean, Time.fixedDeltaTime * t);
-
-        float x = -rb.velocity.x; // might be negative, just test it
-        float z = rb.velocity.z;
-        Vector3 euler = transform.localEulerAngles;
-        euler.z = Mathf.Lerp(euler.x, x, (leanAmount) * leanTime);
-        euler.x = Mathf.Lerp(euler.z, z, (leanAmount) * leanTime);
-
-        transform.localEulerAngles = euler;
-        //print($"x: {x} z: {z} euler: {euler}");
-
-    }
 
     void Update()
     {
-        // //Bank
-        // float bankX = -rb.velocity.x;
-        // //float bankZ = rb.velocity.z;
-        // if (bankX != 0.0f)
-        // {
-        //     rotZ += bankX * bankScale * Time.deltaTime;
-        //     rotZ = ClampAngle(rotZ, -bankRange, bankRange);
-        // }
-        // else
-        // {
-        //     rotZ = Mathf.MoveTowardsAngle(rotZ, 0.0f, returnSpeed * Time.deltaTime);
-        // }
-        // transform.localRotation = Quaternion.Euler(0.0f, 0.0f, rotZ);
+        HandleLean();
     }
+
+    private void HandleLean()
+    {
+        // Calculate the direction the ship is moving in
+        Vector3 forward = rb.transform.TransformDirection(rb.transform.forward);
+
+        float dot = Vector3.Dot(rb.velocity.normalized, forward);
+        int direction = dot >= 0 ? 1 : -1;
+
+        if (rb.velocity.magnitude > 0.1f)
+        {
+            // Calculate the rotation angles based on the velocity and ship orientation
+            float leanX = -rb.velocity.z * direction * leanAmount;
+            float leanZ = rb.velocity.x * direction * leanAmount;
+
+            // Check if the ship is moving forwards or backwards and adjust the signs of the lean angles accordingly
+            if (dot < 0)
+            {
+                leanX = -leanX;
+                leanZ = -leanZ;
+            }
+
+            // Clamp the rotation angles to the specified range
+            leanX = Mathf.Clamp(leanX, -maxLeanAngle, maxLeanAngle);
+            leanZ = Mathf.Clamp(leanZ, -maxLeanAngle, maxLeanAngle);
+
+            // Apply the rotation to the child transform
+            transform.Rotate(leanX * -leanAmount * Time.deltaTime, 0, leanZ * -leanAmount * Time.deltaTime);
+        }
+        else
+    {
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, initialRotation, leanTime * Time.deltaTime);
+
+        }
+}
+
     private void TestLean()
     {
         // Calculate target lean quaternion based on rigidbody velocity
