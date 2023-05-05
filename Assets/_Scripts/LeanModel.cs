@@ -21,7 +21,6 @@ public class LeanModel : MonoBehaviour
         initialRotation = transform.localRotation;
     }
 
-
     void Update()
     {
         HandleLean();
@@ -29,17 +28,14 @@ public class LeanModel : MonoBehaviour
 
     private void HandleLean()
     {
-        // Calculate the direction the ship is moving in
-        //Vector3 forward = rb.transform.TransformDirection(Vector3.forward);
-
-
         if (rb.velocity.magnitude > 0.1f)
         {
-            Vector3 forward = transform.parent.TransformDirection(Vector3.forward);
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
 
             float dot = Vector3.Dot(rb.velocity.normalized, forward);
             int direction = dot >= 0 ? 1 : -1;
-            print("dot: " + dot + " direction: " + direction);
+
+            //print("dot: " + dot + " direction: " + direction);
 
             // Calculate the rotation angles based on the velocity and ship orientation
             float leanX = -rb.velocity.z * direction * leanAmount;
@@ -51,14 +47,16 @@ public class LeanModel : MonoBehaviour
                 leanX = -leanX;
                 leanZ = -leanZ;
             }
-            print("leanX: " + leanX + " leanZ: " + leanZ);
 
             // Clamp the rotation angles to the specified range
             leanX = Mathf.Clamp(leanX, -maxLeanAngle, maxLeanAngle);
             leanZ = Mathf.Clamp(leanZ, -maxLeanAngle, maxLeanAngle);
+            //TODO change Clamp to the rotation angle
+
+            //transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, leanTime * Time.deltaTime);
 
             // Apply the rotation to the child transform
-            transform.Rotate(leanX * -leanAmount * Time.deltaTime, 0, leanZ * -leanAmount * Time.deltaTime);
+            transform.Rotate(leanX * -leanAmount * Time.deltaTime, 0, leanZ * -leanAmount * Time.deltaTime, Space.World);
         }
         else
     {
@@ -77,6 +75,4 @@ public class LeanModel : MonoBehaviour
 
         t = currentLeanTime / leanTime;
     }
-
-
 }
