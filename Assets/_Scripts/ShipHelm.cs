@@ -11,18 +11,13 @@ public class ShipHelm : MonoBehaviour, PlayerControls.IPlayerActions
     Vector3 movement;
     Vector3 movementDirection;
 
-    [SerializeField] float leanAmount = 3f;
-    [SerializeField] float leanTime = 2f;
-
     [SerializeField] float rotAmount = 5f;
     float rotY;
 
     float horizontalInput;
     float verticalInput;
-    float t;
-    float currentLeanTime = 0f;
     Vector3 thrustDir;
-    Quaternion targetRot;
+
     public ShipHelm(Vector2 thrustValue, Vector2 rotateValue)
     {
         this.thrustValue = thrustValue;
@@ -90,8 +85,7 @@ public class ShipHelm : MonoBehaviour, PlayerControls.IPlayerActions
     {
         ApplyRotation();
         ApplyThrust();
-        //ApplyClimb();
-        //ApplyLean();
+        ApplyClimb();
     }
 
     private void ApplyClimb()
@@ -107,8 +101,6 @@ public class ShipHelm : MonoBehaviour, PlayerControls.IPlayerActions
 
     private void ApplyThrust()
     {
-        // Vector3 movement = new Vector3(thrustValue.x, climbValue.y, thrustValue.y);
-        //rb.velocity = transform.forward * movement * speed;
 
         horizontalInput = thrustValue.x;
         verticalInput = thrustValue.y;
@@ -117,33 +109,5 @@ public class ShipHelm : MonoBehaviour, PlayerControls.IPlayerActions
         movement = movementDirection.normalized * speed;
 
         rb.velocity = movement;
-
     }
-
-    private void ApplyLean()
-    {
-        if (rb.velocity.magnitude > 0.1f)
-        {
-            ResetLeanTime();
-        }
-        else
-        {
-            ResetLeanTime();
-        }
-        Quaternion targetLean = Quaternion.Euler(rb.velocity.z * leanAmount, rotY, -rb.velocity.x * leanAmount);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetLean, Time.fixedDeltaTime * t);
-    }
-
-    private void ResetLeanTime()
-    {
-        currentLeanTime += Time.deltaTime;
-        if (currentLeanTime > leanTime)
-        {
-            currentLeanTime = leanTime;
-        }
-
-        t = currentLeanTime / leanTime;
-    }
-
-
 }
