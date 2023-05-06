@@ -6,7 +6,7 @@ using UnityEngine;
 public class LeanModel : MonoBehaviour
 {
     Rigidbody rb;
-    Quaternion initialRotation;
+    Quaternion initialRotation, targetRotation;
     [SerializeField] float leanAmount = 3f;
     [SerializeField] float maxLeanAngle = 25f;
     [SerializeField] float leanTime = 2f;
@@ -35,8 +35,6 @@ public class LeanModel : MonoBehaviour
             float dot = Vector3.Dot(rb.velocity.normalized, forward);
             int direction = dot >= 0 ? 1 : -1;
 
-            //print("dot: " + dot + " direction: " + direction);
-
             // Calculate the rotation angles based on the velocity and ship orientation
             float leanX = -rb.velocity.z * direction * leanAmount;
             float leanZ = rb.velocity.x * direction * leanAmount;
@@ -51,17 +49,15 @@ public class LeanModel : MonoBehaviour
             // Clamp the rotation angles to the specified range
             leanX = Mathf.Clamp(leanX, -maxLeanAngle, maxLeanAngle);
             leanZ = Mathf.Clamp(leanZ, -maxLeanAngle, maxLeanAngle);
-            //TODO change Clamp to the rotation angle
 
-            //transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, leanTime * Time.deltaTime);
+            targetRotation = Quaternion.Euler(-leanX, 0, -leanZ);
 
-            // Apply the rotation to the child transform
-            transform.Rotate(leanX * -leanAmount * Time.deltaTime, 0, leanZ * -leanAmount * Time.deltaTime, Space.World);
+            // Slerp the rotation from the current rotation to the target rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * leanAmount);
         }
         else
-    {
+        {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, initialRotation, leanTime * Time.deltaTime);
-
         }
     }
 

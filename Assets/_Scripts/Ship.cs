@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
+    public int Team { get; set; }
+    public Transform model;
 
-    public List<HardPoint> HardPoints { get; set; }
+    HardPoint[] HardPoints;
+
     // Start is called before the first frame update
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        model = transform.GetChild(0);
+        HardPoints = model.Find("HardPoints").GetComponentsInChildren<HardPoint>();
 
     }
 }
