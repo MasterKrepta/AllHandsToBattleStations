@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ShipHelm : MonoBehaviour, PlayerControls.IPlayerActions
-{
+{       //TODO I need to setup a input class and use that instead of doing it this way.
     PlayerControls controls;
     [SerializeField] float speed = 5f;
     Vector3 movement;
     Vector3 movementDirection;
+    ShipSensors sensors;
 
     [SerializeField] float rotAmount = 5f;
     float rotY;
@@ -32,6 +33,7 @@ public class ShipHelm : MonoBehaviour, PlayerControls.IPlayerActions
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        sensors = GetComponent<ShipSensors>();
         controls = new PlayerControls();
         controls.Player.Enable();
 
@@ -43,6 +45,8 @@ public class ShipHelm : MonoBehaviour, PlayerControls.IPlayerActions
 
         controls.Player.Rotate.performed += OnRotate;
         controls.Player.Rotate.canceled += OnRotate;
+
+
 
     }
 
@@ -110,4 +114,6 @@ public class ShipHelm : MonoBehaviour, PlayerControls.IPlayerActions
 
         rb.velocity = movement;
     }
+
+
 }

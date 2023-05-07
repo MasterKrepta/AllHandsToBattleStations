@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6866879291871928680}
   - component: {fileID: 6866879291871928681}
   - component: {fileID: 7761956151268150010}
+  - component: {fileID: 333943455}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -78,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1d608c457d2174eb2f2235719414a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Team: 1
   model: {fileID: 8467530293057837309}
 --- !u!114 &7761956151268150010
 MonoBehaviour:
@@ -91,6 +93,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dceae4c179c8b34fb8f2dfe01580ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scannerRange: 100
+  Target: {fileID: 0}
+  CurrentTargetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  closestTarget: {fileID: 0}
+--- !u!65 &333943455
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530916669350976783}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &866920117478366838
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leanAmount: 3
-  maxLeanAngle: 5
+  maxLeanAngle: 30
   leanTime: 2
 --- !u!1001 &1699591979652615484
 PrefabInstance:
@@ -1250,8 +1271,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: HardPoint
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4996170955354827153, guid: 6a6937a63510536469fd5ac5a2c2e5a1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6937a63510536469fd5ac5a2c2e5a1, type: 3}
+--- !u!1 &1245982333747778172 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8600920385804881670, guid: 6a6937a63510536469fd5ac5a2c2e5a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 7356073440020929914}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1755169091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245982333747778172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83628fdb24766340872d361f803ce07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 5143046071072060997, guid: 6f11755c59aac2547a67b3452c312193,
+    type: 3}
+  projectileSpawnPoint: {fileID: 3111555350045552757}
+  projectileSpeed: 10
+  fireRate: 1
+--- !u!4 &3111555350045552757 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5564323556429163791, guid: 6a6937a63510536469fd5ac5a2c2e5a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 7356073440020929914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5769794064682854814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3892351358404539620, guid: 6a6937a63510536469fd5ac5a2c2e5a1,

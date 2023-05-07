@@ -206,6 +206,82 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Sensors"",
+            ""id"": ""d9d67d18-19e8-48c3-ac4e-64a08f7666ae"",
+            ""actions"": [
+                {
+                    ""name"": ""SelectTarget"",
+                    ""type"": ""Button"",
+                    ""id"": ""08d7cc35-3825-4c21-a356-1fd879760e4f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1043bb9f-8347-4aed-be51-cff6ff31314e"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Weapon"",
+            ""id"": ""2f3489af-7acc-4c03-9a5c-0d8f2a59b578"",
+            ""actions"": [
+                {
+                    ""name"": ""PrimaryFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""56a5d623-e9ee-4821-b01f-57406a0427bf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SecondaryFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""d88714e3-e2aa-476d-bbe1-10b02f499f04"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""257e2add-ed51-44d1-8fc5-7f66244a85ad"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrimaryFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79408eac-08ab-464f-a9c5-bc7bf66bb756"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -218,6 +294,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Mouse
         m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
         m_Mouse_MouseLook = m_Mouse.FindAction("MouseLook", throwIfNotFound: true);
+        // Sensors
+        m_Sensors = asset.FindActionMap("Sensors", throwIfNotFound: true);
+        m_Sensors_SelectTarget = m_Sensors.FindAction("SelectTarget", throwIfNotFound: true);
+        // Weapon
+        m_Weapon = asset.FindActionMap("Weapon", throwIfNotFound: true);
+        m_Weapon_PrimaryFire = m_Weapon.FindAction("PrimaryFire", throwIfNotFound: true);
+        m_Weapon_SecondaryFire = m_Weapon.FindAction("SecondaryFire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -355,6 +438,80 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public MouseActions @Mouse => new MouseActions(this);
+
+    // Sensors
+    private readonly InputActionMap m_Sensors;
+    private ISensorsActions m_SensorsActionsCallbackInterface;
+    private readonly InputAction m_Sensors_SelectTarget;
+    public struct SensorsActions
+    {
+        private @PlayerControls m_Wrapper;
+        public SensorsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SelectTarget => m_Wrapper.m_Sensors_SelectTarget;
+        public InputActionMap Get() { return m_Wrapper.m_Sensors; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SensorsActions set) { return set.Get(); }
+        public void SetCallbacks(ISensorsActions instance)
+        {
+            if (m_Wrapper.m_SensorsActionsCallbackInterface != null)
+            {
+                @SelectTarget.started -= m_Wrapper.m_SensorsActionsCallbackInterface.OnSelectTarget;
+                @SelectTarget.performed -= m_Wrapper.m_SensorsActionsCallbackInterface.OnSelectTarget;
+                @SelectTarget.canceled -= m_Wrapper.m_SensorsActionsCallbackInterface.OnSelectTarget;
+            }
+            m_Wrapper.m_SensorsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @SelectTarget.started += instance.OnSelectTarget;
+                @SelectTarget.performed += instance.OnSelectTarget;
+                @SelectTarget.canceled += instance.OnSelectTarget;
+            }
+        }
+    }
+    public SensorsActions @Sensors => new SensorsActions(this);
+
+    // Weapon
+    private readonly InputActionMap m_Weapon;
+    private IWeaponActions m_WeaponActionsCallbackInterface;
+    private readonly InputAction m_Weapon_PrimaryFire;
+    private readonly InputAction m_Weapon_SecondaryFire;
+    public struct WeaponActions
+    {
+        private @PlayerControls m_Wrapper;
+        public WeaponActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @PrimaryFire => m_Wrapper.m_Weapon_PrimaryFire;
+        public InputAction @SecondaryFire => m_Wrapper.m_Weapon_SecondaryFire;
+        public InputActionMap Get() { return m_Wrapper.m_Weapon; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(WeaponActions set) { return set.Get(); }
+        public void SetCallbacks(IWeaponActions instance)
+        {
+            if (m_Wrapper.m_WeaponActionsCallbackInterface != null)
+            {
+                @PrimaryFire.started -= m_Wrapper.m_WeaponActionsCallbackInterface.OnPrimaryFire;
+                @PrimaryFire.performed -= m_Wrapper.m_WeaponActionsCallbackInterface.OnPrimaryFire;
+                @PrimaryFire.canceled -= m_Wrapper.m_WeaponActionsCallbackInterface.OnPrimaryFire;
+                @SecondaryFire.started -= m_Wrapper.m_WeaponActionsCallbackInterface.OnSecondaryFire;
+                @SecondaryFire.performed -= m_Wrapper.m_WeaponActionsCallbackInterface.OnSecondaryFire;
+                @SecondaryFire.canceled -= m_Wrapper.m_WeaponActionsCallbackInterface.OnSecondaryFire;
+            }
+            m_Wrapper.m_WeaponActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @PrimaryFire.started += instance.OnPrimaryFire;
+                @PrimaryFire.performed += instance.OnPrimaryFire;
+                @PrimaryFire.canceled += instance.OnPrimaryFire;
+                @SecondaryFire.started += instance.OnSecondaryFire;
+                @SecondaryFire.performed += instance.OnSecondaryFire;
+                @SecondaryFire.canceled += instance.OnSecondaryFire;
+            }
+        }
+    }
+    public WeaponActions @Weapon => new WeaponActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -364,5 +521,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IMouseActions
     {
         void OnMouseLook(InputAction.CallbackContext context);
+    }
+    public interface ISensorsActions
+    {
+        void OnSelectTarget(InputAction.CallbackContext context);
+    }
+    public interface IWeaponActions
+    {
+        void OnPrimaryFire(InputAction.CallbackContext context);
+        void OnSecondaryFire(InputAction.CallbackContext context);
     }
 }
