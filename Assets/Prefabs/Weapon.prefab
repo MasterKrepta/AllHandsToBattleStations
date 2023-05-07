@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f944aecab587147b7e1062ce13c0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetReticle: {fileID: 0}
+  rotateSpeed: 40
 --- !u!114 &2437559904450173542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,8 +160,8 @@ MonoBehaviour:
   projectile: {fileID: 5143046071072060997, guid: 6f11755c59aac2547a67b3452c312193,
     type: 3}
   projectileSpawnPoint: {fileID: 3007971451081645816}
-  projectileSpeed: 10
-  fireRate: 1
+  projectileSpeed: 40
+  fireRate: 0.25
 --- !u!1 &5651064520646456626
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,10 +6,13 @@ using UnityEngine.InputSystem;
 public class WeaponFire : MonoBehaviour, PlayerControls.IWeaponActions
 {
     PlayerControls controls;
+
+    //todo get these from a SO
     [SerializeField] GameObject projectile;
     [SerializeField] Transform projectileSpawnPoint;
-    [SerializeField] float projectileSpeed = 10f;
-    [SerializeField] float fireRate = 1f;
+    [SerializeField] float projectileSpeed = 40f;
+    [SerializeField] float fireRate = .25f;
+
     float nextFireTime = 0f;
     LayerMask FriendlyLayer = 6;
     LayerMask EnemyLayer = 7;
@@ -56,4 +59,5 @@ public class WeaponFire : MonoBehaviour, PlayerControls.IWeaponActions
             newProjectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
         }
     }
+
 }
