@@ -260,6 +260,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "TESTING",
+            "id": "8589a646-ae05-4302-b323-4489e13f8ed0",
+            "actions": [
+                {
+                    "name": "MiddleMouse",
+                    "type": "Button",
+                    "id": "0f0b30c4-5d46-4448-8573-759fb190ca08",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "402ca80d-c9a7-4ea3-bff8-f7e1c7b2b019",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MiddleMouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

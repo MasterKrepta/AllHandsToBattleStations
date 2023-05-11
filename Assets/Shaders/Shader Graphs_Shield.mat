@@ -39,13 +39,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FresnelPower: 2
+    - _FresnelPower: 5
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _SphereHardness: 1
+    - _SphereMask: 0
+    - _SphereRadius: 1
     m_Colors:
     - _BackColor: {r: 0.9433962, g: 0.76136017, b: 0.056959715, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _FrontColor: {r: 0.105882324, g: 0.3458129, b: 0.8392157, a: 1}
+    - _SphereCenter: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6721902429400091968
 MonoBehaviour:

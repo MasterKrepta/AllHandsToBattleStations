@@ -282,6 +282,34 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""TESTING"",
+            ""id"": ""8589a646-ae05-4302-b323-4489e13f8ed0"",
+            ""actions"": [
+                {
+                    ""name"": ""MiddleMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f0b30c4-5d46-4448-8573-759fb190ca08"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""402ca80d-c9a7-4ea3-bff8-f7e1c7b2b019"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MiddleMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -301,6 +329,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Weapon = asset.FindActionMap("Weapon", throwIfNotFound: true);
         m_Weapon_PrimaryFire = m_Weapon.FindAction("PrimaryFire", throwIfNotFound: true);
         m_Weapon_SecondaryFire = m_Weapon.FindAction("SecondaryFire", throwIfNotFound: true);
+        // TESTING
+        m_TESTING = asset.FindActionMap("TESTING", throwIfNotFound: true);
+        m_TESTING_MiddleMouse = m_TESTING.FindAction("MiddleMouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -512,6 +543,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public WeaponActions @Weapon => new WeaponActions(this);
+
+    // TESTING
+    private readonly InputActionMap m_TESTING;
+    private ITESTINGActions m_TESTINGActionsCallbackInterface;
+    private readonly InputAction m_TESTING_MiddleMouse;
+    public struct TESTINGActions
+    {
+        private @PlayerControls m_Wrapper;
+        public TESTINGActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MiddleMouse => m_Wrapper.m_TESTING_MiddleMouse;
+        public InputActionMap Get() { return m_Wrapper.m_TESTING; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TESTINGActions set) { return set.Get(); }
+        public void SetCallbacks(ITESTINGActions instance)
+        {
+            if (m_Wrapper.m_TESTINGActionsCallbackInterface != null)
+            {
+                @MiddleMouse.started -= m_Wrapper.m_TESTINGActionsCallbackInterface.OnMiddleMouse;
+                @MiddleMouse.performed -= m_Wrapper.m_TESTINGActionsCallbackInterface.OnMiddleMouse;
+                @MiddleMouse.canceled -= m_Wrapper.m_TESTINGActionsCallbackInterface.OnMiddleMouse;
+            }
+            m_Wrapper.m_TESTINGActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MiddleMouse.started += instance.OnMiddleMouse;
+                @MiddleMouse.performed += instance.OnMiddleMouse;
+                @MiddleMouse.canceled += instance.OnMiddleMouse;
+            }
+        }
+    }
+    public TESTINGActions @TESTING => new TESTINGActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -530,5 +594,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnPrimaryFire(InputAction.CallbackContext context);
         void OnSecondaryFire(InputAction.CallbackContext context);
+    }
+    public interface ITESTINGActions
+    {
+        void OnMiddleMouse(InputAction.CallbackContext context);
     }
 }
