@@ -42,9 +42,9 @@ Material:
     - _FresnelPower: 5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SphereHardness: 1
+    - _SphereHardness: 0.5
     - _SphereMask: 0
-    - _SphereRadius: 1
+    - _SphereRadius: 0.5
     m_Colors:
     - _BackColor: {r: 0.9433962, g: 0.76136017, b: 0.056959715, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}

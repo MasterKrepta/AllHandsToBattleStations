@@ -21,20 +21,22 @@ public class TestBullet : MonoBehaviour, PlayerControls.ITESTINGActions
 
         if (Physics.Raycast(ray, out hit))
         {
-            VisualEffect effect = Instantiate(vfx, transform.position, Quaternion.identity);
+            VisualEffect effect = Instantiate(vfx, hit.point, Quaternion.identity);
 
             effect.SetVector3("SphereCenter", hit.point);
+
+            Destroy(effect.gameObject, 1.5f);
         }
     }
 
-    void OnCollisionEnter(Collision other)
-    {
-        VisualEffect effect = Instantiate(vfx, transform.position, Quaternion.identity);
+    // void OnCollisionEnter(Collision other)
+    // {
+    //     VisualEffect effect = Instantiate(vfx, transform.position, Quaternion.identity);
 
-        effect.SetVector3("SphereCenter", other.contacts[0].point);
+    //     effect.SetVector3("SphereCenter", other.contacts[0].point);
 
-        //Destroy(effect.gameObject, 1.5f);
-    }
+    //     Destroy(effect.gameObject, 1.5f);
+    // }
 
 
 }
