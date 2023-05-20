@@ -55,13 +55,13 @@ VisualEffect:
       - m_Value: 1
         m_Name: hitTime
         m_Overridden: 1
-      - m_Value: 1.01
+      - m_Value: 0.75
         m_Name: SphereHardness
         m_Overridden: 1
       - m_Value: 1
         m_Name: SohereRadius
         m_Overridden: 1
-      - m_Value: 1
+      - m_Value: 1.5
         m_Name: SphereRadius
         m_Overridden: 1
     m_Vector2f:

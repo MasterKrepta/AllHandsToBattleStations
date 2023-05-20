@@ -29,9 +29,6 @@
         },
         {
             "m_Id": "219a0586da8e421aac6c192e411578a7"
-        },
-        {
-            "m_Id": "aa2683a7ee804058a7c5ecf000fd9512"
         }
     ],
     "m_Keywords": [],
@@ -659,7 +656,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 0.5,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -793,8 +790,8 @@
     "m_AlphaMode": 2,
     "m_RenderFace": 0,
     "m_AlphaClip": false,
-    "m_CastShadows": true,
-    "m_ReceiveShadows": true,
+    "m_CastShadows": false,
+    "m_ReceiveShadows": false,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": true
 }
@@ -1752,7 +1749,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 0.5,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -1992,10 +1989,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 479.1999816894531,
-            "y": 1464.7999267578125,
+            "x": 467.1999816894531,
+            "y": 1470.39990234375,
             "width": 162.39999389648438,
-            "height": 33.5999755859375
+            "height": 33.60009765625
         }
     },
     "m_Slots": [
@@ -2992,33 +2989,6 @@
 }
 
 {
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
-    "m_ObjectId": "aa2683a7ee804058a7c5ecf000fd9512",
-    "m_Guid": {
-        "m_GuidSerialized": "8d54885e-f87a-4fa8-a06e-f75fe950e8e8"
-    },
-    "m_Name": "ClipThreshold",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "ClipThreshold",
-    "m_DefaultReferenceName": "_ClipThreshold",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": 0.0,
-    "m_FloatType": 0,
-    "m_RangeValues": {
-        "x": 0.0,
-        "y": 1.0
-    }
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BranchNode",
     "m_ObjectId": "ab61e1e0b04d4c37923dd4623d1f8ea9",
@@ -3702,9 +3672,6 @@
         },
         {
             "m_Id": "219a0586da8e421aac6c192e411578a7"
-        },
-        {
-            "m_Id": "aa2683a7ee804058a7c5ecf000fd9512"
         }
     ]
 }
