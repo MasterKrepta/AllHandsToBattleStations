@@ -17,10 +17,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 396
+    x: 210
     y: -190
-    width: 969
-    height: 1378
+    width: 1154
+    height: 1398
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -741,6 +741,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614816}
   - {fileID: 8926484042661614817}
   - {fileID: 8926484042661614818}
+  - {fileID: 8926484042661614881}
   - {fileID: 8926484042661614792}
   - {fileID: 8926484042661614793}
   m_OutputSlots: []
@@ -1303,7 +1304,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":4.068535804748535,"g":3.2615537643432619,"b":0.23536984622478486,"a":1.0}'
+      m_SerializableObject: '{"r":0.9473068714141846,"g":0.7605247497558594,"b":0.05612849444150925,"a":1.0}'
     m_Space: 2147483647
   m_Property:
     name: _BackColor
@@ -1673,7 +1674,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 5
+      m_SerializableObject: 1
     m_Space: 2147483647
   m_Property:
     name: _FresnelPower
@@ -1818,7 +1819,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614843}
       inputSlot: {fileID: 8926484042661614812}
-    position: {x: 671.2, y: 944.8}
+    position: {x: 701.6, y: 1047.2}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661614843
@@ -1973,7 +1974,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 396, y: 786}
+  m_UIPosition: {x: 210, y: 793}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -2029,7 +2030,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 653, y: 765}
+  m_UIPosition: {x: 434, y: 773}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2062,7 +2063,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":5.189413547515869,"g":17.298044204711915,"b":0.8649021983146668,"a":1.0},"time":0.0},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.5529412031173706},{"alpha":0.0,"time":1.0}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.14250779151916505,"g":0.4716981053352356,"b":0.02447490394115448,"a":1.0},"time":0.0},{"color":{"r":0.5,"g":0.5,"b":0.5,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.5529412031173706},{"alpha":0.800000011920929,"time":1.0}],"gradientMode":0}'
     m_Space: 2147483647
   m_Property:
     name: gradient
@@ -2319,7 +2320,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614860}
       inputSlot: {fileID: 8926484042661614817}
-    position: {x: 655.2, y: 1023.2}
+    position: {x: 685.6, y: 1134.3999}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661614860
@@ -2399,7 +2400,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614866}
       inputSlot: {fileID: 8926484042661614816}
-    position: {x: 672, y: 983.2}
+    position: {x: 702.4, y: 1085.6}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661614866
@@ -2554,6 +2555,40 @@ MonoBehaviour:
     m_Space: 2147483647
   m_Property:
     name: Lifetime
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+  m_Direction: 0
+  m_LinkedSlots: []
+--- !u!114 &8926484042661614881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614881}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661614788}
+    m_Value:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 0
+    m_Space: 2147483647
+  m_Property:
+    name: _ClipThreshold
     m_serializedType:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
