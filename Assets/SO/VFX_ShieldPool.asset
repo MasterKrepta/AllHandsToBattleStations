@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d43560c10afa27a419b5b52bd65a4d7c, type: 3}
-  m_Name: BoltPool
+  m_Name: VFX_ShieldPool
   m_EditorClassIdentifier: 
-  poolItem: {fileID: 4966339171613049225, guid: 7789c815d14a4fd40bd193c18d7c1599,
+  poolItem: {fileID: 6578369011685240832, guid: a59ed26dd549ea04bb372907d4c8a5b9,
     type: 3}
   amount: 10

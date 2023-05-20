@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43560c10afa27a419b5b52bd65a4d7c, type: 3}
   m_Name: BulletPool
   m_EditorClassIdentifier: 
-  projectile: {fileID: 5143046071072060997, guid: 6f11755c59aac2547a67b3452c312193,
+  poolItem: {fileID: 5143046071072060997, guid: 6f11755c59aac2547a67b3452c312193,
     type: 3}
-  amount: 20
+  amount: 10

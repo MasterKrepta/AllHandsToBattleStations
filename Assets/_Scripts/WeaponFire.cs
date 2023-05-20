@@ -47,11 +47,11 @@ public class WeaponFire : MonoBehaviour, PlayerControls.IWeaponActions
 
     public void OnPrimaryFire(InputAction.CallbackContext context)
     {
-        print("Primary Fire Released " + gameObject.name);
+        //print("Primary Fire Released " + gameObject.name);
         if (Time.time > nextFireTime)
         {
             nextFireTime = Time.time + fireRate;
-            GameObject newProjectile = ProjectilePool.Instance.GetProjectile(projectile);
+            GameObject newProjectile = Pool.Instance.GetProjectile(projectile);
             //GameObject newProjectile = Instantiate(projectile, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
             SetupBullet(newProjectile);
 
@@ -77,7 +77,7 @@ public class WeaponFire : MonoBehaviour, PlayerControls.IWeaponActions
 
     public void OnSecondaryFire(InputAction.CallbackContext context)
     {
-        print("Secondary Fire Released " + gameObject.name);
+        //print("Secondary Fire Released " + gameObject.name);
         if (Time.time > nextFireTime)
         {
             nextFireTime = Time.time + fireRate;
