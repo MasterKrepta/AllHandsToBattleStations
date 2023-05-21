@@ -9,7 +9,7 @@ public class Shield : MonoBehaviour
     float lifeTime = 1.1f;
     Vector3 ShieldOffset;
 
-    [SerializeField] Vector3 ShieldSize;
+    [SerializeField] Vector3 ShieldSize = new Vector3(2, 1.5f, 2);
     void Awake()
     {
         ShieldOffset = GetComponent<Collider>().bounds.size + ShieldSize;
@@ -17,6 +17,7 @@ public class Shield : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+
         //get color from material of bullet
         Color color = other.GetComponentInChildren<Renderer>().material.color;
 

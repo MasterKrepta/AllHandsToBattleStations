@@ -51,6 +51,7 @@ public class LeanModel : MonoBehaviour
             leanZ = Mathf.Clamp(leanZ, -maxLeanAngle, maxLeanAngle);
 
             targetRotation = Quaternion.Euler(-leanX, 0, -leanZ);
+            //TODO fix issue where rotation is not applied to initial rotation. 
 
             // Slerp the rotation from the current rotation to the target rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * leanAmount);

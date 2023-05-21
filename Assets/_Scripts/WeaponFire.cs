@@ -13,7 +13,7 @@ public class WeaponFire : MonoBehaviour, PlayerControls.IWeaponActions
     [SerializeField] Transform projectileSpawnPoint;
     [SerializeField] float projectileSpeed = 40f;
     [SerializeField] float fireRate = .25f;
-    [SerializeField] float lifeTime = 1f;
+    [SerializeField] float lifeTime = 5f;
 
     float nextFireTime = 0f;
     LayerMask FriendlyLayer = 6;

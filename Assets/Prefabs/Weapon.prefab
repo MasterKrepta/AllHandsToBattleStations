@@ -160,8 +160,9 @@ MonoBehaviour:
   projectile: {fileID: 5143046071072060997, guid: 6f11755c59aac2547a67b3452c312193,
     type: 3}
   projectileSpawnPoint: {fileID: 3007971451081645816}
-  projectileSpeed: 40
+  projectileSpeed: 100
   fireRate: 0.25
+  lifeTime: 5
 --- !u!1 &5651064520646456626
 GameObject:
   m_ObjectHideFlags: 0
